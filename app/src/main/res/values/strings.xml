@@ -1,4 +1,14 @@
 <resources>
     <string name="app_name">Movies</string>
     <string name="no_title">Nombre no definido</string>
+    <string name="release">Release date:</string>
+    <string name="duration">Duration:</string>
+    <string name="summary">Summary</string>
+    <string name="genres">Genres:</string>
+    <string name="rating">Rating</string>
+    <string name="popularity">Popularity:</string>
+    <string name="vote_count">Vote count:</string>
+    <string name="vote_average">Vote average:</string>
+    <string name="companies">Production companies:</string>
+    <string name="overview">Overview</string>
 </resources>

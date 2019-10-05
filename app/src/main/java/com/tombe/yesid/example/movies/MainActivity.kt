@@ -6,6 +6,8 @@ import android.widget.Toast
 import com.tombe.yesid.example.movies.adapters.MovieAdapter
 import com.tombe.yesid.example.movies.model.Movie
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.toast
 
 class MainActivity : AppCompatActivity() {
 
@@ -34,8 +36,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun goToDetail(position: Int){
-        Toast.makeText(this, "Pelicula: ${data[position].name}", Toast.LENGTH_SHORT)
-            .show()
+        toast("Pelicula: ${data[position].name}")
+        startActivity<DetailActivity>("movie" to data[position])
     }
 
 }
