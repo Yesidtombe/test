@@ -86,7 +86,7 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/imgBg"
                     android:textStyle="bold"
-                    android:text='@{m.vote_average + ""}'
+                    android:text='@{m.runtime + " min"}'
                     app:layout_constraintBottom_toBottomOf="@+id/duration"
                     app:layout_constraintStart_toEndOf="@+id/duration"
                     tools:text="120 min" />
@@ -131,7 +131,7 @@
                     android:layout_marginEnd="8dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/imgBg"
-                    android:text="@{m.original_title}"
+                    android:text='@{m.budget == 0 ? @string/no_budget : m.budget + "USD"}'
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtLanguage"
                     tools:text="250000" />
@@ -156,7 +156,7 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/imgBg"
                     android:textStyle="bold"
-                    android:text='@{m.genre_ids[0] + ""}'
+                    android:text='@{m.popularity + ""}'
                     app:layout_constraintBottom_toBottomOf="@+id/genres"
                     app:layout_constraintStart_toEndOf="@+id/genres"
                     tools:text="Drama, Action, Comedy" />
@@ -183,7 +183,7 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/imgBg"
                     android:textStyle="bold"
-                    android:text='@{m.vote_average + ""}'
+                    android:text='@{m.popularity + ""}'
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/companies"
@@ -338,7 +338,7 @@
                     android:layout_marginEnd="8dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/imgBg"
-                    android:text="@{m.overview}"
+                    android:text="@{m.overview ?? @string/no_overview}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/overview"
@@ -354,7 +354,7 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/colorAccent"
                     android:textStyle="italic"
-                    android:text="@{m.original_title}"
+                    android:text="@{m.homepage ?? @string/no_homepage}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtOverview"

@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Movies</string>
     <string name="no_title">Name not defined</string>
+    <string name="no_overview">This movie has no overview</string>
+    <string name="no_homepage">Homepage not define</string>
+    <string name="no_budget">Unannounced Budget</string>
     <string name="release">Release date:</string>
     <string name="duration">Duration:</string>
     <string name="summary">Summary</string>

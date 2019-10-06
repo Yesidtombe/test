@@ -5,6 +5,7 @@ import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -14,10 +15,24 @@ import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import com.tombe.yesid.example.movies.databinding.ActivityDetailBinding
 import com.tombe.yesid.example.movies.model.Movie
+import com.tombe.yesid.example.movies.net.ApiClient
 import kotlinx.android.synthetic.main.activity_detail.*
 import org.jetbrains.anko.toast
+import retrofit2.Call
+import retrofit2.Response
 
-class DetailActivity : AppCompatActivity(), Callback {
+class DetailActivity : AppCompatActivity(), Callback, retrofit2.Callback<Movie> {
+    override fun onFailure(call: Call<Movie>, t: Throwable) {
+        Log.i("Movie detail", ""+t.message)
+        toast("Error: "+t.message)
+    }
+
+    override fun onResponse(call: Call<Movie>, response: Response<Movie>) {
+        val peli: Movie? = response.body()
+        binding.movie = peli
+        Log.i("Movie detail", ""+peli)
+        toast(""+peli!!.original_title)
+    }
 
     lateinit var binding: ActivityDetailBinding
 
@@ -31,10 +46,10 @@ class DetailActivity : AppCompatActivity(), Callback {
         else toast("¡ Offline !")
 
 //        val pos: Int? = intent.extras?.getInt("movie")
-//        ApiClient.movies.getPopularMovieAll()
-//            .enqueue(this)
+        ApiClient.movies.getMovieDetail(""+movie?.id)
+            .enqueue(this)
 
-        binding.movie = movie
+        //binding.movie = movie
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         Picasso.with(this)
