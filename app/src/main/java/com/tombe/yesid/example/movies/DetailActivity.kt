@@ -16,6 +16,7 @@ import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import com.tombe.yesid.example.movies.databinding.ActivityDetailBinding
 import com.tombe.yesid.example.movies.model.Movie
+import com.tombe.yesid.example.movies.net.ApiClient
 import kotlinx.android.synthetic.main.activity_detail.*
 
 class DetailActivity : AppCompatActivity(), Callback {
@@ -28,6 +29,20 @@ class DetailActivity : AppCompatActivity(), Callback {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_detail)
         val movie: Movie? = intent.extras?.getParcelable("movie")
 
+
+
+
+//        val pos: Int? = intent.extras?.getInt("movie")
+//        ApiClient.movies.getPopularMovieAll()
+//            .enqueue(this)
+
+
+
+
+
+
+
+        //////
         binding.movie = movie
 
         setSupportActionBar(toolbar)
