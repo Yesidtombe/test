@@ -4,20 +4,18 @@ import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
-import androidx.core.graphics.blue
 import androidx.databinding.DataBindingUtil
 import androidx.palette.graphics.Palette
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import com.tombe.yesid.example.movies.databinding.ActivityDetailBinding
 import com.tombe.yesid.example.movies.model.Movie
-import com.tombe.yesid.example.movies.net.ApiClient
 import kotlinx.android.synthetic.main.activity_detail.*
+import org.jetbrains.anko.toast
 
 class DetailActivity : AppCompatActivity(), Callback {
 
@@ -28,30 +26,23 @@ class DetailActivity : AppCompatActivity(), Callback {
         //setContentView(R.layout.activity_detail)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_detail)
         val movie: Movie? = intent.extras?.getParcelable("movie")
-
-
-
+        val online: Boolean? = intent.extras?.getBoolean("online")
+        if (online!!) toast("¡ Online !")
+        else toast("¡ Offline !")
 
 //        val pos: Int? = intent.extras?.getInt("movie")
 //        ApiClient.movies.getPopularMovieAll()
 //            .enqueue(this)
 
-
-
-
-
-
-
-        //////
         binding.movie = movie
-
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         Picasso.with(this)
-            .load(Uri.parse("http://image.tmdb.org/t/p/original${movie?.img}"))
+            .load(Uri.parse("http://image.tmdb.org/t/p/original${movie?.poster_path}"))
             .into(img, this)
     }
 
+    //region Toolbar/CollapsingBar
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         finish()
         return super.onOptionsItemSelected(item)
@@ -65,14 +56,14 @@ class DetailActivity : AppCompatActivity(), Callback {
         val vibrantColor = palette.getVibrantColor(primaryColor)
 
         collapsingToolbar.setContentScrimColor(vibrantColor)
-        setStatusColot(vibrantColor)
+        setStatusColor(vibrantColor)
     }
 
     override fun onError() {
 
     }
 
-    fun setStatusColot(color: Int){
+    fun setStatusColor(color: Int){
         var blue = Color.blue(color) - 30
         var red = Color.red(color) - 30
         var green = Color.green(color) - 30
@@ -86,5 +77,5 @@ class DetailActivity : AppCompatActivity(), Callback {
             window.statusBarColor = statusColor
         }
     }
-
+    //endregion
 }

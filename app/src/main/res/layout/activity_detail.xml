@@ -33,7 +33,7 @@
                 android:id="@+id/collapsingToolbar"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
-                app:title="@{movie.name}"
+                app:title="@{movie.original_title}"
                 app:layout_scrollFlags="scroll|enterAlwaysCollapsed|exitUntilCollapsed"
                 app:contentScrim="@color/colorPrimary"
                 >

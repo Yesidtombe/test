@@ -55,7 +55,7 @@
 
                 <TextView
                     android:id="@+id/txtRelease"
-                    android:text="@{m.releaseDate}"
+                    android:text="@{m.release_date}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -86,7 +86,7 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/imgBg"
                     android:textStyle="bold"
-                    android:text='@{m.duration + " min"}'
+                    android:text='@{m.vote_average + ""}'
                     app:layout_constraintBottom_toBottomOf="@+id/duration"
                     app:layout_constraintStart_toEndOf="@+id/duration"
                     tools:text="120 min" />
@@ -99,7 +99,7 @@
                     android:layout_marginEnd="8dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/imgBg"
-                    android:text="@{m.language}"
+                    android:text="@{m.original_language}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/summary"
                     tools:text="ES-Co" />
@@ -131,7 +131,7 @@
                     android:layout_marginEnd="8dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/imgBg"
-                    android:text="@{m.budget}"
+                    android:text="@{m.original_title}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtLanguage"
                     tools:text="250000" />
@@ -156,7 +156,7 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/imgBg"
                     android:textStyle="bold"
-                    android:text="@{m.genres}"
+                    android:text='@{m.genre_ids[0] + ""}'
                     app:layout_constraintBottom_toBottomOf="@+id/genres"
                     app:layout_constraintStart_toEndOf="@+id/genres"
                     tools:text="Drama, Action, Comedy" />
@@ -183,7 +183,7 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/imgBg"
                     android:textStyle="bold"
-                    android:text="@{m.companies}"
+                    android:text='@{m.vote_average + ""}'
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/companies"
@@ -229,7 +229,7 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/imgBg"
                     android:textStyle="bold"
-                    android:text="@{m.popularity}"
+                    android:text='@{m.popularity + ""}'
                     app:layout_constraintBottom_toBottomOf="@+id/popularity"
                     app:layout_constraintStart_toEndOf="@+id/popularity"
                     tools:text="0.5" />
@@ -266,7 +266,7 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/imgBg"
                     android:textStyle="bold"
-                    android:text="@{m.voteCount}"
+                    android:text='@{m.vote_count + ""}'
                     app:layout_constraintBottom_toBottomOf="@+id/voteCount"
                     app:layout_constraintStart_toEndOf="@+id/voteCount"
                     tools:text="624" />
@@ -293,7 +293,7 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/imgBg"
                     android:textStyle="bold"
-                    android:text="@{m.voteAverage}"
+                    android:text='@{m.vote_average + ""}'
                     app:layout_constraintBottom_toBottomOf="@+id/voteAverage"
                     app:layout_constraintStart_toEndOf="@+id/voteAverage"
                     tools:text="7.8" />
@@ -302,6 +302,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
@@ -353,7 +354,7 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/colorAccent"
                     android:textStyle="italic"
-                    android:text="@{m.homepage}"
+                    android:text="@{m.original_title}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtOverview"

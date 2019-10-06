@@ -10,6 +10,6 @@ object ApiClient {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    val movies:MovieApi = retrofit.create(MovieApi::class.java)
+    val movies: MovieApi = retrofit.create(MovieApi::class.java)
 
 }

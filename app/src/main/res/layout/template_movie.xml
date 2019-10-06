@@ -47,7 +47,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@color/imgBg"
-                    app:imgUrl="@{movie.img}"
+                    app:imgUrl="@{movie.poster_path}"
                     android:scaleType="centerCrop"/>
 
                 <TextView
@@ -60,7 +60,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/img"
                     tools:text="Nombre Pelicula"
-                    android:text="@{movie.name ?? @string/no_title}"/>
+                    android:text="@{movie.original_title ?? @string/no_title}"/>
 
                 <TextView
                     android:id="@+id/release"
@@ -71,23 +71,34 @@
                     android:layout_marginBottom="8dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                     android:textColor="@color/colorAccent"
-                    android:visibility="@{movie.releaseDate == null ? V.INVISIBLE: V.VISIBLE}"
+                    android:visibility="@{movie.release_date == null ? V.INVISIBLE: V.VISIBLE}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/name"
                     tools:text="2 de Octubre"
-                    android:text="@{movie.releaseDate}"/>
+                    android:text="@{movie.release_date}"/>
 
-                <TextView
-                    android:id="@+id/duration"
+                <ImageView
+                    android:id="@+id/imgStar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-                    app:layout_constraintBottom_toBottomOf="@+id/release"
+                    app:layout_constraintBottom_toBottomOf="@+id/star"
+                    app:layout_constraintEnd_toStartOf="@+id/star"
+                    app:layout_constraintTop_toTopOf="@+id/star"
+                    app:srcCompat="@drawable/ic_star" />
+
+                <TextView
+                    android:id="@+id/star"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    tools:text="120 min"
-                    android:text='@{movie.duration + " min"}'/>
+                    android:text='@{movie.vote_average + ""}'
+                    tools:text="8.8" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
