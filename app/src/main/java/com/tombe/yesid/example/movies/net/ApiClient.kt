@@ -11,5 +11,6 @@ object ApiClient {
         .build()
 
     val movies: MovieApi = retrofit.create(MovieApi::class.java)
+    val series: SerieApi = retrofit.create(SerieApi::class.java)
 
 }

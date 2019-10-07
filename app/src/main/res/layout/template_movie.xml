@@ -9,7 +9,6 @@
         <variable
             name="movie"
             type="com.tombe.yesid.example.movies.model.Movie" />
-
         <variable
             name="position"
             type="int" />
@@ -47,7 +46,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@color/imgBg"
-                    app:imgUrl="@{movie.poster_path}"
+                    app:imgUrl='@{movie.poster_path ?? ""}'
                     android:scaleType="centerCrop"/>
 
                 <TextView

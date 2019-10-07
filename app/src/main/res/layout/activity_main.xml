@@ -16,4 +16,5 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/template_movie"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,6 +7,12 @@
         <variable
             name="m"
             type="com.tombe.yesid.example.movies.model.Movie" />
+        <variable
+            name="gen"
+            type="String"/>
+        <variable
+            name="com"
+            type="String"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -102,7 +108,7 @@
                     android:text="@{m.original_language}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/summary"
-                    tools:text="ES-Co" />
+                    tools:text="ES" />
 
                 <ImageView
                     android:id="@+id/imgLanguage"
@@ -131,10 +137,10 @@
                     android:layout_marginEnd="8dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/imgBg"
-                    android:text='@{m.budget == 0 ? @string/no_budget : m.budget + "USD"}'
+                    android:text='@{m.budget == 0 ? @string/no_budget : m.budget + " USD"}'
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtLanguage"
-                    tools:text="250000" />
+                    tools:text="250000 USD" />
 
                 <TextView
                     android:id="@+id/genres"
@@ -156,7 +162,7 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/imgBg"
                     android:textStyle="bold"
-                    android:text='@{m.popularity + ""}'
+                    android:text="@{gen}"
                     app:layout_constraintBottom_toBottomOf="@+id/genres"
                     app:layout_constraintStart_toEndOf="@+id/genres"
                     tools:text="Drama, Action, Comedy" />
@@ -183,7 +189,7 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/imgBg"
                     android:textStyle="bold"
-                    android:text='@{m.popularity + ""}'
+                    android:text="@{com}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/companies"

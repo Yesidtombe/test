@@ -7,6 +7,12 @@
         <variable
             name="movie"
             type="com.tombe.yesid.example.movies.model.Movie" />
+        <variable
+            name="genero"
+            type="String" />
+        <variable
+            name="companie"
+            type="String" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -18,7 +24,8 @@
             android:layout_height="wrap_content"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-            <include layout="@layout/content_detail" app:m="@{movie}"/>
+            <include layout="@layout/content_detail" app:m="@{movie}"
+                app:gen="@{genero}" app:com="@{companie}"/>
 
         </androidx.core.widget.NestedScrollView>
 

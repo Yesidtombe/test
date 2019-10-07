@@ -5,7 +5,6 @@ import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -22,34 +21,22 @@ import retrofit2.Call
 import retrofit2.Response
 
 class DetailActivity : AppCompatActivity(), Callback, retrofit2.Callback<Movie> {
-    override fun onFailure(call: Call<Movie>, t: Throwable) {
-        Log.i("Movie detail", ""+t.message)
-        toast("Error: "+t.message)
-    }
-
-    override fun onResponse(call: Call<Movie>, response: Response<Movie>) {
-        val peli: Movie? = response.body()
-        binding.movie = peli
-        Log.i("Movie detail", ""+peli)
-        toast(""+peli!!.original_title)
-    }
 
     lateinit var binding: ActivityDetailBinding
+    var moviestatic: Movie? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //setContentView(R.layout.activity_detail)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_detail)
         val movie: Movie? = intent.extras?.getParcelable("movie")
         val online: Boolean? = intent.extras?.getBoolean("online")
         if (online!!) toast("¡ Online !")
         else toast("¡ Offline !")
+        moviestatic = movie
 
-//        val pos: Int? = intent.extras?.getInt("movie")
         ApiClient.movies.getMovieDetail(""+movie?.id)
             .enqueue(this)
 
-        //binding.movie = movie
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         Picasso.with(this)
@@ -91,6 +78,30 @@ class DetailActivity : AppCompatActivity(), Callback, retrofit2.Callback<Movie> 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.statusBarColor = statusColor
         }
+    }
+    //endregion
+
+    //region Callback retrofit
+    override fun onResponse(call: Call<Movie>, response: Response<Movie>) {
+
+        val peli: Movie? = response.body()
+        var genero = ""
+        var companie = ""
+
+        binding.movie = peli
+        peli?.genres?.forEach {
+            genero += it.name+", "
+        }
+        binding.genero = genero
+        peli?.production_companies?.forEach {
+            companie += it.name+", "
+        }
+        binding.companie = companie
+    }
+
+    override fun onFailure(call: Call<Movie>, t: Throwable) {
+        binding.movie = moviestatic
+        toast("Data static")
     }
     //endregion
 }
