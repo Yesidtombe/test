@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.tombe.yesid.example.movies.adapters.MovieAdapter
-import com.tombe.yesid.example.movies.model.ArrayGeneral
 import com.tombe.yesid.example.movies.model.Movie
 import com.tombe.yesid.example.movies.model.ResultMovies
 import com.tombe.yesid.example.movies.net.ApiClient
+import com.tombe.yesid.example.movies.util.Data
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
@@ -27,12 +27,16 @@ class MainActivity : AppCompatActivity(), Callback<ResultMovies> {
         list.adapter = adapter
         adapter.onMovieSelected = this::goToDetail
 
-        val tipo = intent.extras?.getString("item")
+        val tipo = intent.extras?.getInt("item")
+        title = getString(tipo!!)
 
-        title = tipo
-
-        ApiClient.movies.getPopularMovieAll()
-            .enqueue(this)
+        when(tipo){
+            R.string.popular_movies -> ApiClient.movies.getPopularMovies()
+                .enqueue(this)
+            R.string.top_rated_movies -> ApiClient.movies.getTopRatedMovies()
+                .enqueue(this)
+            else -> ApiClient.movies.getUpcomingMovies().enqueue(this)
+        }
 
     }
 
@@ -53,7 +57,9 @@ class MainActivity : AppCompatActivity(), Callback<ResultMovies> {
 
     fun goToDetail(position: Int){
 
-        startActivity<DetailActivity>("movie" to data[position],
+        if (online) startActivity<DetailActivity>("movie" to data[position],
+            "online" to online)
+        else startActivity<DetailActivity>("movie" to Data.data[position],
             "online" to online)
 
     }
@@ -75,31 +81,9 @@ class MainActivity : AppCompatActivity(), Callback<ResultMovies> {
         Toast.makeText(this,
             "Error retrieving information. Check your internet connection. The movie data shown are static",
             Toast.LENGTH_LONG).show()
-
-        //region Data static
-        data.add(Movie(172.1,603, "/a4BfxRK8dBgbQqbRxPs8kmLd8LG.jpg",
-            429203, "en", "The Old Man & the Gun", listOf(),6.3,
-            "The true story of Forrest Tucker, from his audacious escape from San Quentin at the age of 70 to an unprecedented string of heists that confounded authorities and enchanted the public. Wrapped up in the pursuit are a detective, who becomes captivated with Forrest’s commitment to his craft, and a woman, who loves him in spite of his chosen profession.",
-            "2018-09-28", 2500000, "http://www.foxsearchlight.com/theoldmanandthegun",
-            93, listOf()))
-
-        data.add(Movie(239.35,1269, "/zfE0R94v1E8cuKAerbskfD3VfUt.jpg",
-            474350, "en", "It Chapter Two", listOf(),
-            7.1,
-            "27 years after overcoming the malevolent supernatural entity Pennywise, the former members of the Losers' Club, who have grown up and moved away from Derry, are brought back together by a devastating phone call.",
-            "2019-09-06", 79000000, "http://www.it-movie.net/",
-            169, listOf()))
-
-        data.add(Movie(147.755,2456, "/w9kR8qbmQ01HwnvK4alvnQ2ca0L.jpg",
-            301528,  "en", "Toy Story 4", listOf(),
-            7.6,
-            "Woody has always been confident about his place in the world and that his priority is taking care of his kid, whether that's Andy or Bonnie. But when Bonnie adds a reluctant new toy called \\\"Forky\\\" to her room, a road trip adventure alongside old and new friends will show Woody how big the world can be for a toy.",
-            "2019-06-21", 175000000, "https://www.pixar.com/feature-films-toy-story-4",
-            100, listOf()))
-        //endregion
-
         online = false
-        adapter.data = data
+        adapter.data = Data.data
+
     }
     //endregion
 

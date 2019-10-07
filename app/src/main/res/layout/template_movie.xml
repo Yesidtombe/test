@@ -10,17 +10,29 @@
             name="movie"
             type="com.tombe.yesid.example.movies.model.Movie" />
         <variable
+            name="serie"
+            type="com.tombe.yesid.example.movies.model.Serie" />
+        <variable
             name="position"
             type="int" />
         <variable
+            name="popularity"
+            type="java.util.List" />
+        <variable
+            name="country"
+            type="java.util.List" />
+        <variable
             name="handler"
             type="com.tombe.yesid.example.movies.adapters.MovieAdapter" />
+        <variable
+            name="handler2"
+            type="com.tombe.yesid.example.movies.adapters.SerieAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="@{()-> handler.onClickMovie(position)}">
+        android:onClick="@{()-> handler == null ? handler2.onClickSerie(position) : handler.onClickMovie(position) }">
 
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
@@ -46,7 +58,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@color/imgBg"
-                    app:imgUrl='@{movie.poster_path ?? ""}'
+                    imgUrl='@{(movie.poster_path ?? serie.poster_path) ?? ""}'
                     android:scaleType="centerCrop"/>
 
                 <TextView
@@ -59,7 +71,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/img"
                     tools:text="Nombre Pelicula"
-                    android:text="@{movie.original_title ?? @string/no_title}"/>
+                    android:text='@{(movie.original_title ?? serie.original_name) ?? @string/no_title}'/>
 
                 <TextView
                     android:id="@+id/release"
@@ -70,12 +82,11 @@
                     android:layout_marginBottom="8dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                     android:textColor="@color/colorAccent"
-                    android:visibility="@{movie.release_date == null ? V.INVISIBLE: V.VISIBLE}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/name"
                     tools:text="2 de Octubre"
-                    android:text="@{movie.release_date}"/>
+                    android:text="@{country[position] ?? movie.release_date}"/>
 
                 <ImageView
                     android:id="@+id/imgStar"
@@ -95,7 +106,7 @@
                     android:layout_marginBottom="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:text='@{movie.vote_average + ""}'
+                    android:text='@{popularity[position] ?? movie.vote_average + ""}'
                     tools:text="8.8" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_first.*
 import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.toast
 
 class FirstActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -44,11 +45,11 @@ class FirstActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(view: View) {
 
         when (view.id){
-            popularSeries.id -> startActivity<MainActivity>("item" to getString(R.string.popular_series))
-            topSeries.id -> startActivity<MainActivity>("item" to getString(R.string.top_rated_series))
-            popularMovies.id -> startActivity<MainActivity>("item" to getString(R.string.popular_movies))
-            topMovies.id -> startActivity<MainActivity>("item" to getString(R.string.top_rated_movies))
-            else -> startActivity<MainActivity>("item" to getString(R.string.upcoming_movies))
+            popularSeries.id -> startActivity<SerieActivity>("item" to R.string.popular_series)
+            topSeries.id -> startActivity<SerieActivity>("item" to R.string.top_rated_series)
+            popularMovies.id -> startActivity<MainActivity>("item" to R.string.popular_movies)
+            topMovies.id -> startActivity<MainActivity>("item" to R.string.top_rated_movies)
+            else -> startActivity<MainActivity>("item" to R.string.upcoming_movies)
         }
 
     }

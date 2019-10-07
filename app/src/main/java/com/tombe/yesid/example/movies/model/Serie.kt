@@ -17,7 +17,7 @@ data class Serie (
     @SerializedName("homepage") val homepage : String?,
     @SerializedName("original_name") val original_name : String,
     @SerializedName("number_of_seasons") val number_of_seasons : Int?,
-    @SerializedName("origin_country") val origin_country : List<Int>,
+    @SerializedName("origin_country") val origin_country : List<ArrayGeneral>,
     @SerializedName("created_by") val created_by : List<ArrayGeneral>?,
     @SerializedName("first_air_date") val first_air_date : String?
 ): Parcelable
