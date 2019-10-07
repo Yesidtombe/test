@@ -57,10 +57,10 @@ class MainActivity : AppCompatActivity(), Callback<ResultMovies> {
 
     fun goToDetail(position: Int){
 
-        if (online) startActivity<DetailActivity>("movie" to data[position],
-            "online" to online)
-        else startActivity<DetailActivity>("movie" to Data.data[position],
-            "online" to online)
+        if (online) startActivity<DetailActivity>("movie" to data[position].id,
+            "image" to data[position].poster_path, "online" to online)
+        else startActivity<DetailActivity>("movie" to Data.data[position].id,
+            "image" to Data.data[position].poster_path, "online" to online)
 
     }
 

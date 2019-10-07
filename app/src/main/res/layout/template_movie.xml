@@ -16,7 +16,7 @@
             name="position"
             type="int" />
         <variable
-            name="popularity"
+            name="average"
             type="java.util.List" />
         <variable
             name="country"
@@ -86,7 +86,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/name"
                     tools:text="2 de Octubre"
-                    android:text="@{country[position] ?? movie.release_date}"/>
+                    android:text='@{movie.release_date == null ? "First air date: "+serie.first_air_date: movie.release_date }'/>
 
                 <ImageView
                     android:id="@+id/imgStar"
@@ -106,7 +106,7 @@
                     android:layout_marginBottom="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:text='@{popularity[position] ?? movie.vote_average + ""}'
+                    android:text='@{average[position] ?? movie.vote_average + ""}'
                     tools:text="8.8" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

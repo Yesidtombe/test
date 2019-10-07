@@ -17,7 +17,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
@@ -61,10 +61,10 @@
 
                 <TextView
                     android:id="@+id/txtRelease"
-                    android:text="@{m.release_date}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:text="@{m.release_date}"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/imgBg"
                     android:textStyle="bold"
@@ -89,10 +89,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:text='@{m.runtime + " min"}'
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/imgBg"
                     android:textStyle="bold"
-                    android:text='@{m.runtime + " min"}'
                     app:layout_constraintBottom_toBottomOf="@+id/duration"
                     app:layout_constraintStart_toEndOf="@+id/duration"
                     tools:text="120 min" />
@@ -103,9 +103,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="8dp"
+                    android:text="@{m.original_language}"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/imgBg"
-                    android:text="@{m.original_language}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/summary"
                     tools:text="ES" />
@@ -135,9 +135,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="8dp"
+                    android:text='@{m.budget == 0 ? @string/no_budget : m.budget + " USD"}'
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/imgBg"
-                    android:text='@{m.budget == 0 ? @string/no_budget : m.budget + " USD"}'
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtLanguage"
                     tools:text="250000 USD" />
@@ -159,10 +159,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:text="@{gen}"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/imgBg"
                     android:textStyle="bold"
-                    android:text="@{gen}"
                     app:layout_constraintBottom_toBottomOf="@+id/genres"
                     app:layout_constraintStart_toEndOf="@+id/genres"
                     tools:text="Drama, Action, Comedy" />
@@ -186,10 +186,10 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginBottom="16dp"
+                    android:text="@{com}"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/imgBg"
                     android:textStyle="bold"
-                    android:text="@{com}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/companies"
@@ -232,10 +232,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:text='@{m.popularity + ""}'
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/imgBg"
                     android:textStyle="bold"
-                    android:text='@{m.popularity + ""}'
                     app:layout_constraintBottom_toBottomOf="@+id/popularity"
                     app:layout_constraintStart_toEndOf="@+id/popularity"
                     tools:text="0.5" />
@@ -269,10 +269,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:text='@{m.vote_count + ""}'
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/imgBg"
                     android:textStyle="bold"
-                    android:text='@{m.vote_count + ""}'
                     app:layout_constraintBottom_toBottomOf="@+id/voteCount"
                     app:layout_constraintStart_toEndOf="@+id/voteCount"
                     tools:text="624" />
@@ -296,10 +296,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:text='@{m.vote_average + ""}'
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/imgBg"
                     android:textStyle="bold"
-                    android:text='@{m.vote_average + ""}'
                     app:layout_constraintBottom_toBottomOf="@+id/voteAverage"
                     app:layout_constraintStart_toEndOf="@+id/voteAverage"
                     tools:text="7.8" />
@@ -314,6 +314,8 @@
             android:layout_marginStart="6dp"
             android:layout_marginTop="6dp"
             android:layout_marginEnd="6dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardView2">
@@ -342,9 +344,9 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="8dp"
+                    android:text="@{m.overview ?? @string/no_overview}"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/imgBg"
-                    android:text="@{m.overview ?? @string/no_overview}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/overview"
@@ -357,10 +359,10 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginBottom="16dp"
+                    android:text="@{m.homepage ?? @string/no_homepage}"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/colorAccent"
                     android:textStyle="italic"
-                    android:text="@{m.homepage ?? @string/no_homepage}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtOverview"

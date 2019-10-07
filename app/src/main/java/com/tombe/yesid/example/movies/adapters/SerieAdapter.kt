@@ -27,7 +27,7 @@ class SerieAdapter: RecyclerView.Adapter<SerieHolder>() {
         data.forEach {
             average.add(it.vote_average.toString())
             it.origin_country.forEach {
-                pivot += it.name + ", "
+                pivot += "$it, "
             }
             country.add(pivot)
             pivot = ""
@@ -50,9 +50,9 @@ class SerieHolder(view: View): RecyclerView.ViewHolder(view) {
 
     private val binding: TemplateMovieBinding = DataBindingUtil.bind(view)!!
 
-    fun bind(country:MutableList<String>, popularity: MutableList<String>, serie: Serie, position: Int, handler: SerieAdapter){
+    fun bind(country:MutableList<String>, average: MutableList<String>, serie: Serie, position: Int, handler: SerieAdapter){
         binding.country = country
-        binding.popularity = popularity
+        binding.average = average
         binding.serie = serie
         binding.position = position
         binding.handler2 = handler

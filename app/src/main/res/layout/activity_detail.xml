@@ -8,6 +8,9 @@
             name="movie"
             type="com.tombe.yesid.example.movies.model.Movie" />
         <variable
+            name="serie"
+            type="com.tombe.yesid.example.movies.model.Serie" />
+        <variable
             name="genero"
             type="String" />
         <variable
@@ -40,7 +43,7 @@
                 android:id="@+id/collapsingToolbar"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
-                app:title="@{movie.original_title}"
+                app:title="@{movie.original_title ?? serie.original_name}"
                 app:layout_scrollFlags="scroll|enterAlwaysCollapsed|exitUntilCollapsed"
                 app:contentScrim="@color/colorPrimary"
                 >

@@ -24,15 +24,16 @@ object Data {
     "2019-06-21", 175000000, "https://www.pixar.com/feature-films-toy-story-4",
     100, listOf()))
 
+
     val data2:MutableList<Serie> = mutableListOf(
         Serie(150.2,35,
             "/a4BfxRK8dBgbQqbRxPs8kmLd8LG.jpg",1,"es",
             listOf(),65.3,"Overview....", null,"jokeerr",11,
-            listOf(ArrayGeneral(1, "EEUU"), ArrayGeneral(2, "Colombia")), listOf(),null),
+            listOf("Pais 1", "Pais 2"), listOf(),null),
         Serie(150.2,35,
             "/a4BfxRK8dBgbQqbRxPs8kmLd8LG.jpg",1,"es",
             listOf(),39.7,"Overview....", null,"Otro joker",11,
-            listOf(ArrayGeneral(1, "Peru")), listOf(),null)
+            listOf("Colombia", "Peru"), listOf(),null)
     )
 
 }
