@@ -4,10 +4,8 @@
     <string name="no_title">Name not defined</string>
     <string name="no_overview">This movie has no overview</string>
     <string name="no_homepage">Homepage not define</string>
-    <string name="no_budget">Unannounced Budget</string>
+    <string name="no_budget">unannounced budget</string>
     <string name="release">Release date:</string>
-    <string name="created_by">Created by:</string>
-    <string name="first_date">First Air Date:</string>
     <string name="duration">Duration:</string>
     <string name="summary">Summary</string>
     <string name="genres">Genres:</string>
@@ -17,6 +15,9 @@
     <string name="vote_average">Vote average:</string>
     <string name="companies">Production companies:</string>
     <string name="overview">Overview</string>
+    <string name="seasons">Seasons:</string>
+    <string name="created_by">Created by:</string>
+    <string name="first_date">First air date:</string>
     <string name="popular_series">Popular Tv Series</string>
     <string name="popular_movies">Popular Movies</string>
     <string name="top_rated_movies">Top Rated Movies</string>

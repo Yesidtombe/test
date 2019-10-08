@@ -12,6 +12,7 @@ import com.tombe.yesid.example.movies.util.inflate
 class MovieAdapter: RecyclerView.Adapter<MovieHolder>(){
 
     var onMovieSelected:((position:Int)->Unit)? = null
+    var pivote: Boolean = true
 
     var data: List<Movie> = emptyList()
         set(value) {
@@ -20,7 +21,7 @@ class MovieAdapter: RecyclerView.Adapter<MovieHolder>(){
         }
 
     override fun onBindViewHolder(holder: MovieHolder, position: Int) {
-        holder.bind(data[position], position, this)
+        holder.bind(pivote, data[position], position, this)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieHolder =
@@ -38,9 +39,11 @@ class MovieHolder(view: View): RecyclerView.ViewHolder(view) {
 
     private val binding: TemplateMovieBinding = DataBindingUtil.bind(view)!!
 
-    fun bind(movie: Movie, position: Int, handler: MovieAdapter){
+    fun bind(pivot: Boolean, movie: Movie, position: Int, handler: MovieAdapter){
+        binding.pivot = pivot
         binding.movie = movie
         binding.position = position
         binding.handler = handler
     }
+
 }

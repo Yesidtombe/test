@@ -5,7 +5,9 @@ import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
@@ -24,23 +26,22 @@ import retrofit2.Response
 class DetailActivity : AppCompatActivity(), Callback, retrofit2.Callback<Movie> {
 
     lateinit var binding: ActivityDetailBinding
-    var moviestatic: Movie? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_detail)
 
         val movie: Int? = intent.extras?.getInt("movie")
-        val online: Boolean? = intent.extras?.getBoolean("online")
         val imagepos: String? = intent.extras?.getString("image")
-        if (online!!) toast("¡ Online !")
-        else toast("¡ Offline !")
-        Data.data.forEach {
-            if (it.id == movie) moviestatic = it
-        }
+        val online: Boolean? = intent.extras?.getBoolean("online")
 
-        ApiClient.movies.getMovieDetail(""+movie)
+        if(online!!) ApiClient.movies.getMovieDetail(""+movie)
             .enqueue(this)
+
+        else {
+            loadData(Data.dataMov[movie!!])
+            toast("Data static")
+        }
 
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -86,27 +87,46 @@ class DetailActivity : AppCompatActivity(), Callback, retrofit2.Callback<Movie> 
     }
     //endregion
 
-    //region Callback retrofit
-    override fun onResponse(call: Call<Movie>, response: Response<Movie>) {
+    //region loadData
+    fun loadData(mov: Movie){
 
-        val peli: Movie? = response.body()
         var genero = ""
         var companie = ""
+        binding.movie = mov
 
-        binding.movie = peli
-        peli?.genres?.forEach {
+        mov?.genres?.forEach {
             genero += it.name+", "
         }
         binding.genero = genero
-        peli?.production_companies?.forEach {
+
+        mov?.production_companies?.forEach {
             companie += it.name+", "
         }
+        if (companie == "") companie = "Not specified"
         binding.companie = companie
+
+    }
+    //endregion
+
+    //region Callback retrofit
+    override fun onResponse(call: Call<Movie>, response: Response<Movie>) {
+
+        when(response.code()){
+            200 -> {
+                val peli: Movie = response.body()!!
+                Log.i("Movie", ""+peli)
+                loadData(peli)
+            }
+            401 -> toast("Invalid API key: You must be granted a valid key")
+            else -> toast("¡ Movie detail not found !")
+        }
+
     }
 
     override fun onFailure(call: Call<Movie>, t: Throwable) {
-        binding.movie = moviestatic
-        toast("Data static")
+        Toast.makeText(this,
+            "Error retrieving information. Check your internet connection. The movie data shown are static",
+            Toast.LENGTH_LONG).show()
     }
     //endregion
 }

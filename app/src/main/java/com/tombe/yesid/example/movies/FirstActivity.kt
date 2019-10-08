@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_first.*
 import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.toast
 
 class FirstActivity : AppCompatActivity(), View.OnClickListener {
 

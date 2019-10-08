@@ -4,15 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View" alias="V"/>
         <variable
             name="m"
             type="com.tombe.yesid.example.movies.model.Movie" />
+        <variable
+            name="ser"
+            type="com.tombe.yesid.example.movies.model.Serie" />
         <variable
             name="gen"
             type="String"/>
         <variable
             name="com"
             type="String"/>
+        <variable
+            name="coun"
+            type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -53,7 +60,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
-                    android:text="@string/release"
+                    android:text="@{m != null ? @string/release: @string/seasons}"
+                    tools:text="@string/release"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/imgBg"
                     app:layout_constraintStart_toStartOf="parent"
@@ -64,7 +72,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text="@{m.release_date}"
+                    android:text='@{m.release_date ?? ser.number_of_seasons + ""}'
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/imgBg"
                     android:textStyle="bold"
@@ -78,7 +86,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
-                    android:text="@string/duration"
+                    android:text="@{m != null ? @string/duration: @string/first_date}"
+                    tools:text="@string/duration"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/imgBg"
                     app:layout_constraintStart_toStartOf="parent"
@@ -89,7 +98,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text='@{m.runtime + " min"}'
+                    android:text='@{m.runtime == null ? ser.first_air_date : m.runtime + " min"}'
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/imgBg"
                     android:textStyle="bold"
@@ -103,7 +112,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="8dp"
-                    android:text="@{m.original_language}"
+                    android:text="@{m.original_language ?? ser.original_language}"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/imgBg"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -124,6 +133,7 @@
                     android:id="@+id/imgMoney"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:visibility="@{m != null ? V.VISIBLE: V.GONE}"
                     app:layout_constraintBottom_toBottomOf="@+id/txtMoney"
                     app:layout_constraintEnd_toStartOf="@+id/txtMoney"
                     app:layout_constraintTop_toTopOf="@+id/txtMoney"
@@ -135,7 +145,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="8dp"
-                    android:text='@{m.budget == 0 ? @string/no_budget : m.budget + " USD"}'
+                    android:text='@{m.budget == null ? coun : m.budget + " USD"}'
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/imgBg"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -156,15 +166,19 @@
 
                 <TextView
                     android:id="@+id/txtGenres"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
                     android:text="@{gen}"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/imgBg"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/genres"
+                    app:layout_constraintBottom_toTopOf="@+id/companies"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/genres"
+                    app:layout_constraintTop_toTopOf="@+id/genres"
                     tools:text="Drama, Action, Comedy" />
 
                 <TextView
@@ -173,11 +187,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
-                    android:text="@string/companies"
+                    android:text="@{m != null ? @string/companies: @string/created_by}"
+                    tools:text="@string/companies"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/imgBg"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/genres" />
+                    app:layout_constraintTop_toBottomOf="@+id/txtGenres" />
 
                 <TextView
                     android:id="@+id/txtCompanies"
@@ -232,7 +247,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text='@{m.popularity + ""}'
+                    android:text='@{m != null ? m.popularity + "" : ser.popularity + ""}'
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/imgBg"
                     android:textStyle="bold"
@@ -269,7 +284,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text='@{m.vote_count + ""}'
+                    android:text='@{m != null ? m.vote_count + "": ser.vote_count + ""}'
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/imgBg"
                     android:textStyle="bold"
@@ -296,7 +311,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text='@{m.vote_average + ""}'
+                    android:text='@{m != null ? m.vote_average + "": ser.vote_average + ""}'
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/imgBg"
                     android:textStyle="bold"
@@ -344,7 +359,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="8dp"
-                    android:text="@{m.overview ?? @string/no_overview}"
+                    android:text="@{m.overview != null ? m.overview : (ser.overview ?? @string/no_overview)}"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/imgBg"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -359,7 +374,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginBottom="16dp"
-                    android:text="@{m.homepage ?? @string/no_homepage}"
+                    android:text="@{m.homepage != null ? m.homepage: (ser.homepage ?? @string/no_homepage)}"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/colorAccent"
                     android:textStyle="italic"

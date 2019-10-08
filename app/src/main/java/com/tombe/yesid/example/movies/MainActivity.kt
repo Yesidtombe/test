@@ -1,6 +1,7 @@
 package com.tombe.yesid.example.movies
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.tombe.yesid.example.movies.adapters.MovieAdapter
@@ -30,14 +31,24 @@ class MainActivity : AppCompatActivity(), Callback<ResultMovies> {
         val tipo = intent.extras?.getInt("item")
         title = getString(tipo!!)
 
+        adapter.pivote = tipo != R.string.popular_movies
+
         when(tipo){
             R.string.popular_movies -> ApiClient.movies.getPopularMovies()
                 .enqueue(this)
             R.string.top_rated_movies -> ApiClient.movies.getTopRatedMovies()
                 .enqueue(this)
-            else -> ApiClient.movies.getUpcomingMovies().enqueue(this)
+            else -> ApiClient.movies.getUpcomingMovies()
+                .enqueue(this)
         }
 
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        finish()
+        return super.onOptionsItemSelected(item)
     }
 
     //region loadData
@@ -59,8 +70,8 @@ class MainActivity : AppCompatActivity(), Callback<ResultMovies> {
 
         if (online) startActivity<DetailActivity>("movie" to data[position].id,
             "image" to data[position].poster_path, "online" to online)
-        else startActivity<DetailActivity>("movie" to Data.data[position].id,
-            "image" to Data.data[position].poster_path, "online" to online)
+        else startActivity<DetailActivity>("movie" to position,
+            "image" to Data.dataMov[position].poster_path, "online" to online)
 
     }
 
@@ -82,9 +93,8 @@ class MainActivity : AppCompatActivity(), Callback<ResultMovies> {
             "Error retrieving information. Check your internet connection. The movie data shown are static",
             Toast.LENGTH_LONG).show()
         online = false
-        adapter.data = Data.data
+        adapter.data = Data.dataMov
 
     }
     //endregion
-
 }

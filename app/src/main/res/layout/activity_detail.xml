@@ -16,6 +16,9 @@
         <variable
             name="companie"
             type="String" />
+        <variable
+            name="country"
+            type="String" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -27,8 +30,8 @@
             android:layout_height="wrap_content"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-            <include layout="@layout/content_detail" app:m="@{movie}"
-                app:gen="@{genero}" app:com="@{companie}"/>
+            <include layout="@layout/content_detail" app:m="@{movie}" app:gen="@{genero}"
+                app:com="@{companie}" app:ser="@{serie}" app:coun="@{country}"/>
 
         </androidx.core.widget.NestedScrollView>
 
@@ -43,7 +46,7 @@
                 android:id="@+id/collapsingToolbar"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
-                app:title="@{movie.original_title ?? serie.original_name}"
+                app:title="@{movie != null ? movie.original_title : serie.original_name}"
                 app:layout_scrollFlags="scroll|enterAlwaysCollapsed|exitUntilCollapsed"
                 app:contentScrim="@color/colorPrimary"
                 >

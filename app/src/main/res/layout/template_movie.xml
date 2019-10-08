@@ -16,11 +16,8 @@
             name="position"
             type="int" />
         <variable
-            name="average"
-            type="java.util.List" />
-        <variable
-            name="country"
-            type="java.util.List" />
+            name="pivot"
+            type="Boolean" />
         <variable
             name="handler"
             type="com.tombe.yesid.example.movies.adapters.MovieAdapter" />
@@ -93,10 +90,22 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
+                    android:visibility="@{pivot == true ? V.VISIBLE: V.GONE}"
                     app:layout_constraintBottom_toBottomOf="@+id/star"
                     app:layout_constraintEnd_toStartOf="@+id/star"
                     app:layout_constraintTop_toTopOf="@+id/star"
                     app:srcCompat="@drawable/ic_star" />
+
+                <ImageView
+                    android:id="@+id/imgPeople"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:visibility="@{pivot == false ? V.VISIBLE: V.GONE}"
+                    app:layout_constraintBottom_toBottomOf="@+id/star"
+                    app:layout_constraintEnd_toStartOf="@+id/star"
+                    app:layout_constraintTop_toTopOf="@+id/star"
+                    app:srcCompat="@drawable/ic_people" />
 
                 <TextView
                     android:id="@+id/star"
@@ -106,7 +115,7 @@
                     android:layout_marginBottom="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:text='@{average[position] ?? movie.vote_average + ""}'
+                    android:text='@{pivot == true ? (movie == null ? serie.vote_average + "": movie.vote_average + ""): (movie == null ? serie.popularity + "": movie.popularity + "")}'
                     tools:text="8.8" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
